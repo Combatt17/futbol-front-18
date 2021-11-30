@@ -1,17 +1,18 @@
 <div class="container mt-5 col-7">
     <h3>Iniciar sesión</h3>
-    <form>
+    <form [formGroup]="inicioForm" (ngSubmit)="entrar()">
         <div class="mb-3">
            <label class="form-label"> Usuario</label>
-           <input type="text" class="form-control" placeholder="Ingrese usuario">
+           <input type="text" formControlName="username"  class="form-control" placeholder="Ingrese usuario">
         </div>
         <div>
             <label class="form-label">Contraseña</label>
-            <input type="password" class="form-control" placeholder="******">
+            <input type="password" formControlName="password" class="form-control" placeholder="******">
         </div>
-        <a class="btn btn-success mt-3">Ingresar</a><br>
+        <button type="submit" class="btn btn-success mt-3">Ingresar</button><br>
         <div class="text-center">
             <a class="mt-5" routerLink="registrarse">Registrarse</a>
         </div>
     </form>
 </div>
+
