@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -10,7 +11,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class LoginComponent implements OnInit {
 
   inicioForm!: FormGroup;
-  constructor(private usuarioService: UsuarioService, private fb: FormBuilder) { }
+  
+  constructor(
+    private usuarioService: UsuarioService, 
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.inicioForm=this.fb.group({
@@ -18,10 +23,15 @@ export class LoginComponent implements OnInit {
       password: ['']
     })
   }
-
+  
   entrar(){
-     this.usuarioService.ingresar(this.inicioForm.value).subscribe(data => {
+     this.usuarioService.ingresar(this.inicioForm.value).subscribe((data:any)=> {
        console.log(data)
+       if(data.mensaje=="Se accedió correctamente"){
+          this.router.navigateByUrl("inicio")
+       }else{
+         alert(data.mensaje)
+       }
      })
   }
 }
