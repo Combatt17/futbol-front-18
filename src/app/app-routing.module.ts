@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProtegerLoginGuard } from './guards/proteger-login.guard';
+import { ProtegerRutaGuard } from './guards/proteger-ruta.guard';
 import { InicioComponent } from './principal/inicio/inicio.component';
 import { LoginComponent } from './usuario/login/login.component';
 import { RegistrarComponent } from './usuario/registrar/registrar.component';
@@ -7,7 +9,7 @@ import { RegistrarComponent } from './usuario/registrar/registrar.component';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'registrarse',
@@ -15,7 +17,9 @@ const routes: Routes = [
   },
   {
     path:'inicio',
-    component: InicioComponent
+    component: InicioComponent,
+    canActivate:[ProtegerRutaGuard],
+    canLoad:[ProtegerRutaGuard]
   }
 ];
 
